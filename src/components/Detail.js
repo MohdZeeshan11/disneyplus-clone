@@ -1,26 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import db from "../firebase";
+import { moviesData } from "../movies";
 
 const Detail = () => {
   const { id } = useParams();
   const [detailData, setDetailData] = useState({});
 
+  const singleMovie = moviesData.find((item) => {
+    return item.id == id;
+  });
+
   useEffect(() => {
-    db.collection("movies")
-      .doc(id)
-      .get()
-      .then((doc) => {
-        if (doc.exists) {
-          setDetailData(doc.data());
-        } else {
-          console.log("no such document in firebase 🔥");
-        }
-      })
-      .catch((error) => {
-        console.log("Error getting document:", error);
-      });
+    setDetailData(singleMovie);
   }, [id]);
 
   return (

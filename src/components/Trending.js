@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectTrending } from "../components/features/movie/movieSlice";
+import { moviesTrending } from "../movies";
 
 const Trending = (props) => {
-  const movies = useSelector(selectTrending);
+  const movies = moviesTrending
 
   return (
     <Container>
